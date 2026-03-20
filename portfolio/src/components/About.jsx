@@ -14,9 +14,9 @@ function About() {
       </h2>
 
       <p className="text-gray-600 text-lg leading-relaxed">
-        I'm Emmanuel, a Computer Science student passionate about
-        building modern software and web applications. I enjoy
-        solving complex problems and learning new technologies.
+        Hi! I'm Emmanuel Ojetunde, a second-year Computer Science student at Dalhousie University with a strong passion for software development
+        and technology. I enjoy building web applications, diving into algorithms, and exploring the latest tools in the tech world.
+        Currently, I'm focused on expanding my skills in front-end development and love working on projects that create real-world impact.
       </p>
 
       <p className="text-gray-600 mt-4 text-lg">

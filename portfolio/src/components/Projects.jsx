@@ -10,12 +10,7 @@ function Projects() {
     {
       title: "React Portfolio",
       description: "Modern portfolio website built with React and Tailwind",
-      github: "#"
-    },
-    {
-      title: "Java Projects",
-      description: "Collection of academic Java projects and algorithms",
-      github: "#"
+      github: "https://github.com/Emmanuel27121/Personal_Website.git   "
     },
     {
       title: "Flashcard Genrator",
