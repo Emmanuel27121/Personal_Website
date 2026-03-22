@@ -3,7 +3,7 @@ function Navbar() {
     <nav className="flex justify-between items-center px-8 py-5 shadow-md sticky top-0 bg-white">
 
       <h1 className="font-bold text-2xl text-primary">
-        Emmanuel Ojetunde
+        Emmanuel
       </h1>
 
       <ul className="flex gap-6 text-gray-700">
