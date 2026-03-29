@@ -4,7 +4,7 @@ import ParticlesBackground from "./ParticlesBackground"
 function Hero() {
   return (
 
-    <section className="h-screen flex items-center justify-center bg-gradient-to-r from-deepblue via-indigo-600 to-redish text-white">
+    <section className="h-screen p-3 flex items-center justify-center bg-gradient-to-r from-deepblue via-indigo-600 to-redish text-white">
       <ParticlesBackground />
 
       <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
@@ -21,7 +21,7 @@ function Hero() {
           </h1>
 
           <p className="text-xl opacity-90 mb-6">
-            Computer Science Student | Software Developer
+            Computer science student | Dalhousie university | Software Development, Game Dev
           </p>
 
           <div className="flex gap-4">

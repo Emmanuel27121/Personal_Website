@@ -15,9 +15,9 @@ function Skills() {
 
   return (
 
-    <section id="skills" className="py-24 bg-gray-100 text-center bg-gradient-to-r from-deepblue via-indigo-600 to-redish text-white">
+    <section id="skills" className="py-24 bg-gray text-center">
 
-      <h2 className="text-3xl font-bold bg-gradient-to-r text-transparent text-white m-4">
+      <h2 className="text-3xl font-bold bg-gradient-to-r from-deepblue to-redish bg-clip-text text-transparent text-center mb-12">
         Tech Stack
       </h2>
 
@@ -31,7 +31,7 @@ function Skills() {
           >
 
             {skill.icon}
-            <p className="text-white">{skill.name}</p>
+            <p className="text-black">{skill.name}</p>
 
           </div>
 

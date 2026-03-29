@@ -25,7 +25,7 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="py-24 text-center bg-gradient-to-r from-deepblue via-indigo-600 to-redish text-white"
+      className="p-10 text-center bg-gradient-to-r from-deepblue via-indigo-600 to-redish text-white"
     >
 
       <h2 className="text-3xl font-bold text-white bg-clip-text text-transparent text-center mb-8">
@@ -38,7 +38,7 @@ function Contact() {
       </p>
 
       <form ref={form} onSubmit={sendEmail}
-            className="max-w-md mx-auto m-9 flex flex-col gap-4 bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+            className="max-w-md mx-auto m-9 text-black flex flex-col gap-4 bg-white p-8 rounded-xl shadow-lg border border-gray-200">
         <input
             type='text'
             name="user_name"

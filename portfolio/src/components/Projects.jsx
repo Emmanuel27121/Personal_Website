@@ -22,10 +22,10 @@ function Projects() {
   return (
     <section
       id="projects"
-      className="py-24 bg-light"
+      className="py-24 bg-light p-3 bg-gradient-to-r from-deepblue via-indigo-600 to-redish text-white"
     >
 
-      <h2 className="text-3xl font-bold bg-gradient-to-r from-deepblue to-redish bg-clip-text text-transparent text-center mb-12">
+      <h2 className="text-3xl font-bold  text-white bg-clip-text text-transparent text-center mb-8">
         Projects
       </h2>
 
