@@ -39,9 +39,12 @@ function Contact() {
 
       <form ref={form} onSubmit={sendEmail}
             className="max-w-md mx-auto m-9 text-black flex flex-col gap-4 bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+
+        <input type="hidden" name="title" value="Portfolio Inquiry" />
+
         <input
             type='text'
-            name="user_name"
+            name="name"
             placeholder="Your Name"
             className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-redish focus:ring-2 focus:ring-redish transition"
             required
@@ -49,7 +52,7 @@ function Contact() {
 
         <input
             type='email'
-            name="user_email"
+            name="email"
             placeholder="Your Email"
             className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-redish focus:ring-2 focus:ring-redish transition"
             required
