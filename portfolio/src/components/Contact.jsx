@@ -1,33 +1,43 @@
 "use client";
 
 import { useRef } from "react";
-import { sendEmail} from "../action";
 import { toast, Toaster } from "react-hot-toast";
 
 
 function Contact() {
   const formRef = useRef(null);
 
-
-  async function handleSubmit(formData) {
+  async function handleSubmit(e) {
+    e.preventDefault(); // Vite needs this manually
     const loadingToast = toast.loading("Sending message...");
 
-    try{
-      const res = await sendEmail(formData);
+    // Get data from the form
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
 
-      if(res.success) {
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
         toast.success("Email sent successfully!", { id: loadingToast });
-        formRef.current?.reset();
-      }else{
-        toast.error("Failed to send email. Please try again.", { id: loadingToast });
+        e.target.reset();
+      } else {
+        toast.error("Failed to send email.", { id: loadingToast });
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("An unexpected error occurred.", { id: loadingToast });
     }
-
-
   }
+
 
   return (
     <section
@@ -46,7 +56,7 @@ function Contact() {
         or discuss opportunities.
       </p>
 
-      <form action={handleSubmit}
+      <form onSubmit={handleSubmit}
             ref={formRef}
             className="max-w-md mx-auto m-9 text-black flex flex-col gap-4 bg-white p-8 rounded-xl shadow-lg border border-gray-200">
 
