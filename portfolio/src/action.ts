@@ -17,6 +17,7 @@ export async function sendEmail(formData: FormData){
             subject: `New Portfolio Inquiry from ${name}`,
             text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n ${message}`,
         });
+        return { success: true };
     } catch(err){
         console.error(err);
         return { success: false };
