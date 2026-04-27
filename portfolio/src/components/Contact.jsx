@@ -1,32 +1,41 @@
-import {useRef} from "react";
-import emailjs from "emailjs-com"
+"use client";
+
+import { useRef } from "react";
+import { sendEmail} from "../action";
+import { toast, Toaster } from "react-hot-toast";
 
 
 function Contact() {
-  const form = useRef();
+  const formRef = useRef(null);
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-    emailjs.sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        form.current,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    ).then(
-        () => {
-          alert("Message sent successfully!");
-        },
-        () => {
-          alert("Failed to send message");
-        }
-    )
-    e.target.reset();
+
+  async function handleSubmit(formData) {
+    const loadingToast = toast.loading("Sending message...");
+
+    try{
+      const res = await sendEmail(formData);
+
+      if(res.success) {
+        toast.success("Email sent successfully!", { id: loadingToast });
+        formRef.current?.reset();
+      }else{
+        toast.error("Failed to send email. Please try again.", { id: loadingToast });
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("An unexpected error occurred.", { id: loadingToast });
+    }
+
+
   }
+
   return (
     <section
       id="contact"
       className="p-10 text-center bg-gradient-to-r from-deepblue via-indigo-600 to-redish text-white"
     >
+
+      <Toaster position="bottom-right" />
 
       <h2 className="text-3xl font-bold text-white bg-clip-text text-transparent text-center mb-8">
         Contact Me
@@ -37,7 +46,8 @@ function Contact() {
         or discuss opportunities.
       </p>
 
-      <form ref={form} onSubmit={sendEmail}
+      <form action={handleSubmit}
+            ref={formRef}
             className="max-w-md mx-auto m-9 text-black flex flex-col gap-4 bg-white p-8 rounded-xl shadow-lg border border-gray-200">
 
         <input type="hidden" name="title" value="Portfolio Inquiry" />
