@@ -1,32 +1,47 @@
-import {useRef} from "react";
-import emailjs from "emailjs-com"
+"use client";
+
+import { useState } from "react";
+import { toast, Toaster } from "react-hot-toast";
 
 
 function Contact() {
-  const form = useRef();
+  const [isSending, setIsSending] = useState(false);
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
-    emailjs.sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        form.current,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    ).then(
-        () => {
-          alert("Message sent successfully!");
-        },
-        () => {
-          alert("Failed to send message");
-        }
-    )
-    e.target.reset();
+    setIsSending(true);
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    const loadingToast = toast.loading("Sending message...");
+
+    try{
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        toast.success("Email sent successfully!", { id: loadingToast });
+        e.target.reset();
+      } else {
+        toast.error("Failed to send email.", { id: loadingToast });
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An unexpected error occurred.", { id: loadingToast });
+    } finally {
+      setIsSending(false);
+    }
   }
+
   return (
     <section
       id="contact"
       className="p-10 text-center bg-gradient-to-r from-deepblue via-indigo-600 to-redish text-white"
     >
+
+      <Toaster position="bottom-right" />
 
       <h2 className="text-3xl font-bold text-white bg-clip-text text-transparent text-center mb-8">
         Contact Me
@@ -37,7 +52,7 @@ function Contact() {
         or discuss opportunities.
       </p>
 
-      <form ref={form} onSubmit={sendEmail}
+      <form onSubmit={sendEmail}
             className="max-w-md mx-auto m-9 text-black flex flex-col gap-4 bg-white p-8 rounded-xl shadow-lg border border-gray-200">
 
         <input type="hidden" name="title" value="Portfolio Inquiry" />
@@ -67,11 +82,14 @@ function Contact() {
 
         <button
             type="submit"
-            className="bg-gradient-to-r from-deepblue to-redish text-white py-3 rounded-lg border border-white hover:scale-105 transition"
-        > Send Message </button>
+            disabled={isSending}
+            className={`py-3 rounded-lg border border-white text-white transition ${
+                isSending
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-gradient-to-r from-deepblue to-redish hover:scale-105"
+            }`}
+        > {isSending ? "Sending..." : "Send Message"} </button>
       </form>
-
-
 
       <div className="flex justify-center gap-6">
 
