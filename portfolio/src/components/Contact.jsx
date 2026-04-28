@@ -83,7 +83,7 @@ function Contact() {
         <button
             type="submit"
             disabled={isSending}
-            className={`py-3 rounded-lg border border-white transition ${
+            className={`py-3 rounded-lg border border-white text-white transition ${
                 isSending
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-gradient-to-r from-deepblue to-redish hover:scale-105"
