@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { ContactEmail } from '../src/email/ContactEmail.jsx'
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -13,7 +14,7 @@ export default async function handler(req, res) {
             to: 'opeoje27@gmail.com',
             replyTo: email,
             subject: `New Message from ${name}`,
-            text: message,
+            react: ContactEmail({ name, email, message }),
         });
 
         res.status(200).json(data);
