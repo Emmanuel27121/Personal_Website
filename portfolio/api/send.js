@@ -2,16 +2,12 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const config = {
-    runtime: 'edge',
-};
-
-export default async function handler(req: Request) {
+export default async function handler(req, res) {
     if (req.method !== 'POST') return new Response('Method not allowed', { status: 405 });
 
-    try {
-        const { name, email, message } = await req.json();
+    const { name, email, message } = req.body;
 
+    try {
         const data = await resend.emails.send({
             from: 'Contact Form <contact@emmanueloje.online>',
             to: 'opeoje27@gmail.com',
@@ -20,8 +16,8 @@ export default async function handler(req: Request) {
             text: message,
         });
 
-        return new Response(JSON.stringify(data), { status: 200 });
+        res.status(200).json(data);
     } catch (error) {
-        return new Response(JSON.stringify({ error }), { status: 500 });
+        res.status(400).json(error);
     }
 }

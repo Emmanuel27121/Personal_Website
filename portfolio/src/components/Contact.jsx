@@ -1,31 +1,26 @@
 "use client";
 
-import { useRef } from "react";
+import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 
 
 function Contact() {
-  const formRef = useRef(null);
+  const [isSending, setIsSending] = useState(false);
 
-  async function handleSubmit(e) {
-    e.preventDefault(); // Vite needs this manually
+  const sendEmail = async (e) => {
+    e.preventDefault();
+    setIsSending(true);
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
     const loadingToast = toast.loading("Sending message...");
 
-    // Get data from the form
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      message: formData.get("message"),
-    };
-
-    try {
-      const response = await fetch('/api/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    try{
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-
       if (response.ok) {
         toast.success("Email sent successfully!", { id: loadingToast });
         e.target.reset();
@@ -35,9 +30,10 @@ function Contact() {
     } catch (error) {
       console.error(error);
       toast.error("An unexpected error occurred.", { id: loadingToast });
+    } finally {
+      setIsSending(false);
     }
   }
-
 
   return (
     <section
@@ -56,8 +52,7 @@ function Contact() {
         or discuss opportunities.
       </p>
 
-      <form onSubmit={handleSubmit}
-            ref={formRef}
+      <form onSubmit={sendEmail}
             className="max-w-md mx-auto m-9 text-black flex flex-col gap-4 bg-white p-8 rounded-xl shadow-lg border border-gray-200">
 
         <input type="hidden" name="title" value="Portfolio Inquiry" />
@@ -87,11 +82,14 @@ function Contact() {
 
         <button
             type="submit"
-            className="bg-gradient-to-r from-deepblue to-redish text-white py-3 rounded-lg border border-white hover:scale-105 transition"
-        > Send Message </button>
+            disabled={isSending}
+            className={`py-3 rounded-lg border border-white transition ${
+                isSending
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-gradient-to-r from-deepblue to-redish hover:scale-105"
+            }`}
+        > {isSending ? "Sending..." : "Send Message"} </button>
       </form>
-
-
 
       <div className="flex justify-center gap-6">
 
