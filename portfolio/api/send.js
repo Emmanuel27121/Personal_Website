@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { ContactEmail } from '../src/email/ContactEmail.jsx'
+import { ContactEmail } from '../src/email/ContactEmail'
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
