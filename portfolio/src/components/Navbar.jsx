@@ -11,10 +11,10 @@ function Navbar() {
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex gap-6 text-gray-700">
-              <li><a href="#about" className="hover:text-primary">About</a></li>
-              <li><a href="#skills" className="hover:text-primary">Skills</a></li>
-              <li><a href="#projects" className="hover:text-primary">Projects</a></li>
-              <li><a href="#contact" className="hover:text-primary">Contact</a></li>
+              <li><a href="#about" className=" hover:text-redish hover:scale-110 hover:-translate-y-1 inline-block ">About</a></li>
+              <li><a href="#skills" className=" hover:text-redish hover:scale-110 hover:-translate-y-1 inline-block ">Skills</a></li>
+              <li><a href="#projects" className=" hover:text-redish hover:scale-110 hover:-translate-y-1 inline-block ">Projects</a></li>
+              <li><a href="#contact" className=" hover:text-redish hover:scale-110 hover:-translate-y-1 inline-block ">Contact</a></li>
           </ul>
 
           {/* Mobile Menu */}

@@ -15,7 +15,8 @@ function Projects() {
     {
       title: "Flashcard Genrator",
       description: "A pdf flashcard genrator built with python and react",
-      github: "https://github.com/Emmanuel27121/Flashcard-Web.git"
+      github: "https://github.com/Emmanuel27121/Flashcard-Web.git",
+      website: "https://flashcards.emmanueloje.online/"
     }
   ]
 
@@ -46,12 +47,26 @@ function Projects() {
               {project.description}
             </p>
 
-            <a
-              href={project.github} target="_blank"
-              className="text-blue-500 font-medium"
-            >
-              View Code →
-            </a>
+            <div className="flex gap-4">
+              <a
+                href={project.github} target="_blank" rel="noopener noreferrer"
+                className="text-blue-500 font-medium"
+              >
+                View Code →
+              </a>
+
+              {project.website && (
+                <a
+                  href={project.website} target="_blank" rel="noopener noreferrer"
+                  className="text-red-500 font-medium"
+                >
+                  View Website →
+                </a>
+              )}
+
+            </div>
+
+            
 
           </div>
 
